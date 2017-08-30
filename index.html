@@ -34,10 +34,18 @@
         
         var updateCallback1 = function(data) {
            
-           
-           console.log(data.length);
-           console.log(data.lines.length);
-                    
+           var length = data.lines.length;
+           if(data.lines.[length-2].source == 'visitor'){
+               
+               TimeCustomer = data.lines[length-2].time;
+               var Difference = TimeAgent - TimeCustomer;
+               if (Difference > 10000){
+                   
+                   console.log("sms to send");
+                   
+               }
+               
+           }
         };
                 
       
