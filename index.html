@@ -48,6 +48,12 @@
                
            }
         };
+        
+        
+        var updateCallback2 = function(data) {
+           
+           console.log(data);
+        };
                 
       
   
@@ -69,6 +75,14 @@
             // called when the bind is completed successfully,
             // or when the action terminated with an error
         };
+        
+        var notifyWhenDone2 = function(err) {
+            if (err) {
+                // Do something with the error
+            }
+            // called when the bind is completed successfully,
+            // or when the action terminated with an error
+        };
      
         var pathToData = "chatTranscript";
        
@@ -78,6 +92,7 @@
             greenlight = 0;
              SDK.unbind(pathToData, updateCallback, notifyWhenDone);
              SDK.get(pathToData, updateCallback1, notifyWhenDone1);
+             SDK.get("authenticatedData", updateCallback2, notifyWhenDone2);
              SDK.bind(pathToData, updateCallback, notifyWhenDone);
         }
         
