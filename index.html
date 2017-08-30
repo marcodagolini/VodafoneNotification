@@ -60,6 +60,11 @@
                 var n = str.indexOf("@liveperson.com");
                 var phone = str.substring(0, n);
                 console.log(phone);
+                request.open('POST', "https://api.twilio.com/2010-04-01/Accounts/"+AccountSid+"/Messages.json", true);
+                request.setRequestHeader('Authorization', 'Basic ' + authorizationBasic);
+                request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
+                request.setRequestHeader('Accept', 'application/json');
+                request.send("To=%2B"+phone+"&From="+source+"&Body="+messageBody);
                 sendSMS = 0;
            }
         };
