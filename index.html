@@ -24,11 +24,11 @@
            
             if (data.newValue.lines[0].source == 'agent') {
                 
-               console.log(data);
-               var TimeAgent = data.newValue.lines[0].time;
-               console.log(data);
-                   
-                   if (data.newValue.lines[1].source == 'visitor') {
+                var TimeAgent = data.newValue.lines[0].time;
+                
+                var conversationCallback = function(data1) {
+                    
+                    if (data1.newValue.lines[1].source == 'visitor') {
                        var TimeCustomer = data.newValue.lines[1].time;
                        var Difference = TimeAgent - TimeCustomer;
                        if (Difference > 10000){
@@ -36,6 +36,21 @@
                        }
                    
                }
+                    
+                };
+                var conversationNotifyWhenDone = function(err) {
+                   if (err) {
+                        // Do something with the error
+                   }
+                     // called when the bind is completed successfully,
+                     // or when the action terminated with an error
+                };
+                
+                SDK.get("chatTranscript", conversationCallback, conversationNotifyWhenDone);
+       
+               
+                   
+                   
   
             
             }
