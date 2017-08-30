@@ -25,6 +25,8 @@
         var source = "%2B18447224192";
         var phone = "";
         var messageBody = "https://marcodagolini.github.io/oAuth-test/";
+        var authorizationBasic = window.btoa(AccountSid + ':' + AuthToken);
+        var request = new XMLHttpRequest();
         var SDK = lpTag.agentSDK;
         SDK.init();
       
