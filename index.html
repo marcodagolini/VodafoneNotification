@@ -30,6 +30,13 @@
             }
                     
         };
+        
+        var updateCallback1 = function(data) {
+           
+           
+           console.log("inside");
+                    
+        };
                 
       
   
@@ -37,6 +44,14 @@
         
         
         var notifyWhenDone = function(err) {
+            if (err) {
+                // Do something with the error
+            }
+            // called when the bind is completed successfully,
+            // or when the action terminated with an error
+        };
+        
+        var notifyWhenDone1 = function(err) {
             if (err) {
                 // Do something with the error
             }
@@ -51,7 +66,10 @@
         if(greenlight){
             greenlight = 0;
              SDK.unbind(pathToData, updateCallback, notifyWhenDone);
+             SDK.get(pathToData, updateCallback1, notifyWhenDone1);
+             SDK.bind(pathToData, updateCallback, notifyWhenDone);
         }
+        
             }, 1000);
       
        
