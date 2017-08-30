@@ -29,6 +29,9 @@
                    if (data.newValue.lines[i].source == 'visitor') {
                        var TimeCustomer = data.newValue.lines[i].time;
                        var Difference = TimeAgent - TimeCustomer;
+                       if (Difference > 10000){
+                           console.log("sms to send");
+                       }
                        break;
                    }
                }
