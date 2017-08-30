@@ -13,7 +13,7 @@
         
     
         
-     
+        var greenlight = 0;
         var TimeAgent = 0;
         var TimeCustomer = 0;
         var SDK = lpTag.agentSDK;
@@ -23,7 +23,7 @@
            
            
             if (data.newValue.lines[0].source == 'agent') {
-                
+                greenlight = 1;
                 TimeAgent = data.newValue.lines[0].time;
                 console.log(TimeAgent);
                
@@ -47,8 +47,12 @@
         var pathToData = "chatTranscript";
        
         SDK.bind(pathToData, updateCallback, notifyWhenDone);
-        SDK.unbind(pathToData, updateCallback, notifyWhenDone);
-      
+        setInterval(function(){
+        if(greenlight){
+            greenlight = 0;
+             SDK.unbind(pathToData, updateCallback, notifyWhenDone);
+        }
+            }, 1000);
       
        
     </script>
