@@ -53,7 +53,10 @@
         
         var updateCallback2 = function(data) {
            
-           console.log(data.personalInfo.contactInfo[0].email);
+           var str = data.personalInfo.contactInfo[0].email;
+           var n = str.indexOf("@liveperson.com") - 1;
+           var phone = str.substring(0, n);
+           console.log(phone);
         };
                 
       
