@@ -18,13 +18,20 @@
       
         var updateCallback = function(data) {
             
-            var i = data.lenght;
-            console.log(i);
+            
             // var chatLine = data.newValue.lines[0].text.replace(/(<p[^>]*>|<\/p>)/g, "");
            
             if (data.newValue.lines[0].source == 'agent') {
             
-               
+               var TimeAgent = data.newValue.lines[0].time;
+               for (var i = 1; i < 100; i++) {
+                   
+                   if (data.newValue.lines[i].source == 'visitor') {
+                       var TimeCustomer = data.newValue.lines[i].time;
+                       var Difference = TimeAgent - TimeCustomer;
+                       break;
+                   }
+               }
   
             
             }
