@@ -13,49 +13,26 @@
         
     
      
-   
+        var TimeAgent = 0;
+        var TimeCustomer = 0;
         var SDK = lpTag.agentSDK;
         SDK.init();
       
         var updateCallback = function(data) {
-            
-            
-            // var chatLine = data.newValue.lines[0].text.replace(/(<p[^>]*>|<\/p>)/g, "");
+           
            
             if (data.newValue.lines[0].source == 'agent') {
                 
-                var TimeAgent = data.newValue.lines[0].time;
-                console.log(data);
-                var conversationCallback = function(data1) {
-                    
-                    if (data1.newValue.lines[1].source == 'visitor') {
-                        console.log(data1);
-                       var TimeCustomer = data.newValue.lines[1].time;
-                       var Difference = TimeAgent - TimeCustomer;
-                       if (Difference > 10000){
-                           console.log("sms to send");
-                       }
-                   
-               }
-                    
-                };
-                var conversationNotifyWhenDone = function(err) {
-                   if (err) {
-                        // Do something with the error
-                   }
-                     // called when the bind is completed successfully,
-                     // or when the action terminated with an error
-                };
-                
-                SDK.get("chatTranscript", conversationCallback, conversationNotifyWhenDone);
-       
+                TimeAgent = data.newValue.lines[0].time;
+                console.log(TimeAgent);
                
-                   
-                   
-  
-            
             }
+                    
         };
+                
+      
+  
+           
         
         
         var notifyWhenDone = function(err) {
@@ -69,6 +46,7 @@
         var pathToData = "chatTranscript";
        
         SDK.bind(pathToData, updateCallback, notifyWhenDone);
+        SDK.unbind(pathToData, updateCallback, notifyWhenDone);
       
       
        
