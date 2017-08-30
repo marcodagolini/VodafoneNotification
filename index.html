@@ -25,10 +25,11 @@
             if (data.newValue.lines[0].source == 'agent') {
                 
                 var TimeAgent = data.newValue.lines[0].time;
-                
+                console.log(data);
                 var conversationCallback = function(data1) {
                     
                     if (data1.newValue.lines[1].source == 'visitor') {
+                        console.log(data1);
                        var TimeCustomer = data.newValue.lines[1].time;
                        var Difference = TimeAgent - TimeCustomer;
                        if (Difference > 10000){
