@@ -102,7 +102,7 @@
                          callback(xhr.responseText);
                      }
                  
-                 xhr.open("GET", "https://localhost:10081/add?convID=" + convID + "&phone=" + phone, true);
+                 xhr.open("GET", "http://localhost:10081/add?convID=" + convID + "&phone=" + phone, true);
                  xhr.send(null);
                  sendSMS = 0;   
             }
