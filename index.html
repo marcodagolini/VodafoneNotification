@@ -20,6 +20,7 @@
         var sendSMS = 0;
         var TimeAgent = 0;
         var TimeCustomer = 0;
+        var ConversationID = "";
         var AccountSid  = "ACb5fb3257bf67189507a00c1f95caa7d7";
         var AuthToken = "430582dc56a920e9875d54affbf5901d"; 
         var source = "%2B18447224192";
@@ -60,6 +61,7 @@
         };
         
         
+        
         var updateCallback2 = function(data) {
            
            if (sendSMS){
@@ -77,7 +79,22 @@
         };
                 
       
-  
+        var updateCallback3 = function(data) {
+           
+           var length = data.lines.length;
+           if(data.lines[(length-2)].source == 'visitor'){
+               
+               TimeCustomer = data.lines[(length-2)].time;
+               var Difference = TimeAgent - TimeCustomer;
+               if (Difference > 10000){
+                   
+                   console.log("sms to send");
+                   sendSMS = 1;
+                   
+               }
+               
+           }
+        };
            
         
         
@@ -104,6 +121,14 @@
             // called when the bind is completed successfully,
             // or when the action terminated with an error
         };
+        
+        var notifyWhenDone3 = function(err) {
+            if (err) {
+                // Do something with the error
+            }
+            // called when the bind is completed successfully,
+            // or when the action terminated with an error
+        };
      
         var pathToData = "chatTranscript";
        
@@ -114,6 +139,7 @@
              SDK.unbind(pathToData, updateCallback, notifyWhenDone);
              SDK.get(pathToData, updateCallback1, notifyWhenDone1);
              SDK.get("authenticatedData", updateCallback2, notifyWhenDone2);
+             SDK.get(pathToData, updateCallback1, notifyWhenDone1);
              SDK.bind(pathToData, updateCallback, notifyWhenDone);
         }
         
