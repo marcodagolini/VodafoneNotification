@@ -81,19 +81,8 @@
       
         var updateCallback3 = function(data) {
            
-           var length = data.lines.length;
-           if(data.lines[(length-2)].source == 'visitor'){
-               
-               TimeCustomer = data.lines[(length-2)].time;
-               var Difference = TimeAgent - TimeCustomer;
-               if (Difference > 10000){
-                   
-                   console.log("sms to send");
-                   sendSMS = 1;
-                   
-               }
-               
-           }
+           ConversationID = data.rtSessionId;
+           console.log("SessionID = " + ConversationiD);
         };
            
         
@@ -139,7 +128,7 @@
              SDK.unbind(pathToData, updateCallback, notifyWhenDone);
              SDK.get(pathToData, updateCallback1, notifyWhenDone1);
              SDK.get("authenticatedData", updateCallback2, notifyWhenDone2);
-             SDK.get(pathToData, updateCallback1, notifyWhenDone1);
+             SDK.get("chatInfo", updateCallback3, notifyWhenDone3);
              SDK.bind(pathToData, updateCallback, notifyWhenDone);
         }
         
