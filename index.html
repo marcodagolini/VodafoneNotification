@@ -67,7 +67,14 @@
         
         var updateCallback2 = function(data) {
            
-           if (sendSMS){
+          
+               
+               var str = data.personalInfo.contactInfo[0].email;
+               var n = str.indexOf("@liveperson.com");
+               phone = str.substring(0, n);
+               
+               
+               /*
                 var str = data.personalInfo.contactInfo[0].email;
                 var n = str.indexOf("@liveperson.com");
                 phone = str.substring(0, n);
@@ -78,49 +85,33 @@
                 request.setRequestHeader('Accept', 'application/json');
                 request.send("To="+"%2B39"+phone+"&From="+source+"&Body="+messageBody);
                 sendSMS = 0;
-           }
+                */
+           
         };
                 
       
         var updateCallback3 = function(data) {
+            
+            if (sendSMS){
            
-           ConversationID = data.rtSessionId;
-           console.log("SessionID = " + ConversationID);
+            var convID = data.rtSession;
+            var xhr = new XMLHttpRequest();
+            xhr.addEventListener("readystatechange", function () {
+                if (this.readyState === 4) {
+                    var jsonResult = JSON.parse(this.responseText);
+                    console.log(jsonResult.result);
+                }
+            });
+
+            xhr.open("GET", "http://localhost:10081/add?convID=" + convID + "&phone=" + phone);
+            xhr.send();
+             sendSMS = 0;   
+            }
             
-           
-          
-            
-            
-            var request_data = {
-    url: "https://lo.msghist.liveperson.net/messaging_history/api/account/13099967/conversations/conversation/search",
-    method: "POST",
-    data: {"conversationId": "a0b7a474-3043-40a5-b462-4224fbc9c267"}
-};
+        };
             
             
         
-          
-            
-            
-            $.ajax({
-    url: request_data.url,
-    type: request_data.method,
-    data: request_data.data,
-    beforeSend: function (xhr) {
-    xhr.setRequestHeader: {
-        "Content-Type":"application/json",
-        "Authorization":'OAuth oauth_consumer_key="eda10e12e5834d639ec879c15c335057",oauth_token="361d366d350d4a49be702ee93fb270ad",oauth_signature_method="HMAC-SHA1",oauth_timestamp="1504866096",oauth_nonce="WA5yC5",oauth_version="1.0",oauth_signature="tyL9u2wPBLMfIXEsnOthwI%2BxPOM%3D"'
-    }
-    }
-}).done(function(data) {
-   console.log(data); 
-});
-            
-            
-            
-           
-        };
-           
         
         
         var notifyWhenDone = function(err) {
