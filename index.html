@@ -4,7 +4,6 @@
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script type="text/javascript" charset="utf8" src="https://lpcdn.lpsnmedia.net/webagent/client-SDK.min.js"></script>
-    <script src="https://raw.githubusercontent.com/ddo/oauth-1.0a/master/oauth-1.0a.js"></script>
     
     
 
@@ -89,17 +88,7 @@
            console.log("SessionID = " + ConversationID);
             
            
-           var oauth = OAuth({
-    consumer: {
-        key: "eda10e12e5834d639ec879c15c335057",
-        secret: "25d7dd3c53aa9cc0"
-    },
-    signature_method: "HMAC-SHA1",
-    hash_function: function(base_string, key) {
-        return CryptoJS.HmacSHA1(base_string, key).toString(CryptoJS.enc.Base64);
-    }
-});
-           
+          
             
             
             var request_data = {
@@ -109,11 +98,7 @@
 };
             
             
-            var token = {
-    key: "361d366d350d4a49be702ee93fb270ad",
-    secret: "153b60cd97c1c009"
-};
-            
+        
           
             
             
@@ -121,7 +106,10 @@
     url: request_data.url,
     type: request_data.method,
     data: request_data.data,
-    headers: oauth.toHeader(oauth.authorize(request_data, token))
+    headers: {
+        "Content-Type":"application/json",
+        "Authorization":'OAuth oauth_consumer_key="eda10e12e5834d639ec879c15c335057",oauth_token="361d366d350d4a49be702ee93fb270ad",oauth_signature_method="HMAC-SHA1",oauth_timestamp="1504866096",oauth_nonce="WA5yC5",oauth_version="1.0",oauth_signature="tyL9u2wPBLMfIXEsnOthwI%2BxPOM%3D"'
+    }
 }).done(function(data) {
    console.log(data); 
 });
