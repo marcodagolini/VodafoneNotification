@@ -90,10 +90,10 @@
            
            var oauth = OAuth({
     consumer: {
-        key: 'eda10e12e5834d639ec879c15c335057',
-        secret: '25d7dd3c53aa9cc0'
+        key: "eda10e12e5834d639ec879c15c335057",
+        secret: "25d7dd3c53aa9cc0"
     },
-    signature_method: 'HMAC-SHA1',
+    signature_method: "HMAC-SHA1",
     hash_function: function(base_string, key) {
         return CryptoJS.HmacSHA1(base_string, key).toString(CryptoJS.enc.Base64);
     }
@@ -102,15 +102,15 @@
             
             
             var request_data = {
-    url: 'https://lo.msghist.liveperson.net/messaging_history/api/account/13099967/conversations/conversation/search',
-    method: 'POST',
+    url: "https://lo.msghist.liveperson.net/messaging_history/api/account/13099967/conversations/conversation/search",
+    method: "POST",
     data: {"conversationId": "a0b7a474-3043-40a5-b462-4224fbc9c267"}
 };
             
             
             var token = {
-    key: '361d366d350d4a49be702ee93fb270ad',
-    secret: '153b60cd97c1c009'
+    key: "361d366d350d4a49be702ee93fb270ad",
+    secret: "153b60cd97c1c009"
 };
             
           
