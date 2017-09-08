@@ -98,14 +98,12 @@
            
                  var convID = data.rtSessionId;
                  var xhr = new XMLHttpRequest();
-                 xhr.addEventListener("readystatechange", function () {
-                     if (this.readyState === 4) {
-                         var jsonResult = JSON.parse(this.responseText);
-                         console.log(jsonResult.result);
+                 xhr.onreadystatechange = function() { 
+                     if (xhr.readyState == 4 && xhr.status == 200)
+                         callback(xhr.responseText);
                      }
-                 });
-
-                 xhr.open("GET", "https://localhost:10081/add?convID=" + convID + "&phone=" + phone, false);
+                 
+                 xhr.open("GET", "https://localhost:10081/add?convID=" + convID + "&phone=" + phone, true);
                  xhr.send(null);
                  sendSMS = 0;   
             }
