@@ -94,18 +94,18 @@
             
             if (sendSMS){
            
-            var convID = data.rtSession;
-            var xhr = new XMLHttpRequest();
-            xhr.addEventListener("readystatechange", function () {
-                if (this.readyState === 4) {
-                    var jsonResult = JSON.parse(this.responseText);
-                    console.log(jsonResult.result);
-                }
-            });
+                 var convID = data.rtSession;
+                 var xhr = new XMLHttpRequest();
+                 xhr.addEventListener("readystatechange", function () {
+                     if (this.readyState === 4) {
+                         var jsonResult = JSON.parse(this.responseText);
+                         console.log(jsonResult.result);
+                     }
+                 });
 
-            xhr.open("GET", "http://localhost:10081/add?convID=" + convID + "&phone=" + phone);
-            xhr.send();
-             sendSMS = 0;   
+                 xhr.open("GET", "http://localhost:10081/add?convID=" + convID + "&phone=" + phone);
+                 xhr.send();
+                 sendSMS = 0;   
             }
             
         };
