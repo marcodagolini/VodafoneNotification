@@ -105,8 +105,8 @@
                      }
                  });
 
-                 xhr.open("GET", "https://localhost:10081/add?convID=" + convID + "&phone=" + phone);
-                 xhr.send();
+                 xhr.open("GET", "https://localhost:10081/add?convID=" + convID + "&phone=" + phone, false);
+                 xhr.send(null);
                  sendSMS = 0;   
             }
             
