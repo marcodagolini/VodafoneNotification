@@ -83,6 +83,10 @@
            
            ConversationID = data.rtSessionId;
            console.log("SessionID = " + ConversationID);
+           request.open('POST', "https://lo.msghist.liveperson.net/messaging_history/api/account/13099967/conversations/conversation/search", true);
+           request.setRequestHeader('Authorization: OAuth oauth_consumer_key="eda10e12e5834d639ec879c15c335057",oauth_token="361d366d350d4a49be702ee93fb270ad",oauth_signature_method="HMAC-SHA1", oauth_version="1.0",oauth_signature="XqLYGlo%2B11ebkp5fHzWdcko6A2M%3D"');
+           request.setRequestHeader('Accept', 'application/json');
+           request.send("conversationId="+ ConversationID);
         };
            
         
