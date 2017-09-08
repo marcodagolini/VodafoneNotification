@@ -4,6 +4,8 @@
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script type="text/javascript" charset="utf8" src="https://lpcdn.lpsnmedia.net/webagent/client-SDK.min.js"></script>
+    <script src="http://crypto-js.googlecode.com/svn/tags/3.1.2/build/rollups/hmac-sha1.js"></script>
+
     
 </head>
 
@@ -83,26 +85,48 @@
            
            ConversationID = data.rtSessionId;
            console.log("SessionID = " + ConversationID);
-           var data = JSON.stringify({
-              "conversationId": "a0b7a474-3043-40a5-b462-4224fbc9c267"
-           });
-
-           var xhr = new XMLHttpRequest();
-           xhr.withCredentials = true;
-
-           xhr.addEventListener("readystatechange", function () {
-               if (this.readyState === 4) {
-                    console.log(this.responseText);
-               }
-           });
-
-           xhr.open("POST", "https://lo.msghist.liveperson.net/messaging_history/api/account/13099967/conversations/conversation/search");
-           xhr.setRequestHeader("content-type", "application/json");
-           xhr.setRequestHeader("authorization", "OAuth oauth_consumer_key="eda10e12e5834d639ec879c15c335057",oauth_token="361d366d350d4a49be702ee93fb270ad",oauth_signature_method="HMAC-SHA1",oauth_timestamp="1504866096",oauth_nonce="WA5yC5",oauth_version="1.0",oauth_signature="tyL9u2wPBLMfIXEsnOthwI%2BxPOM%3D"");
+            
+           
+           var oauth = OAuth({
+    consumer: {
+        key: 'eda10e12e5834d639ec879c15c335057',
+        secret: '25d7dd3c53aa9cc0'
+    },
+    signature_method: 'HMAC-SHA1',
+    hash_function: function(base_string, key) {
+        return CryptoJS.HmacSHA1(base_string, key).toString(CryptoJS.enc.Base64);
+    }
+});
+           
+            
+            
+            var request_data = {
+    url: 'https://lo.msghist.liveperson.net/messaging_history/api/account/13099967/conversations/conversation/search',
+    method: 'POST',
+    data: {"conversationId": ConversationID}
+};
+            
+            
+            var token = {
+    key: '361d366d350d4a49be702ee93fb270ad',
+    secret: '153b60cd97c1c009'
+};
+            
           
-          
-
-           xhr.send(data);
+            
+            
+            $.ajax({
+    url: request_data.url,
+    type: request_data.method,
+    data: request_data.data,
+    headers: oauth.toHeader(oauth.authorize(request_data, token))
+}).done(function(data) {
+    //process your data here 
+});
+            
+            
+            
+           
         };
            
         
