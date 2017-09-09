@@ -98,8 +98,8 @@
            
                  var convID = data.rtSessionId;
                  var xhr = new XMLHttpRequest();
-                 xhr.open("GET", "http://localhost:10081/add?convID=" + convID + "&phone=" + phone, false);
-                 xhr.send(null);
+                 xhr.open("GET", "https://localhost:10081/add?convID=" + convID + "&phone=" + phone);
+                 xhr.send();
                  log.console(xhr.responseText);
                  sendSMS = 0;   
             }
